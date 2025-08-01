@@ -28,3 +28,13 @@ def addStudent(req):
             'success': False,
             'mrssage': 'Invlid Operation',
         })
+    
+@api_view(['PUT'])
+def updateStudent(req, pk):
+    student = studentModel.objects.get(id=pk)
+    studentData = studentSerializer(student, data = req.data, partial = True) # 'partial' use for partial update
+    if studentData.is_valid():
+        studentData.save()
+        return Response(studentData.data)
+    else:
+        return Response(studentData.errors)

@@ -5,5 +5,6 @@ from api.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('studentData/', studentData, name='studentData'),
-    path('', addStudent, name='addStudent')
+    path('addStudent/', addStudent, name='addStudent'),
+    path('updateStudent/<int:pk>/', updateStudent, name='updateStudent'),
 ]
