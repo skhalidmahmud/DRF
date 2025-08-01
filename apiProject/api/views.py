@@ -38,3 +38,10 @@ def updateStudent(req, pk):
         return Response(studentData.data)
     else:
         return Response(studentData.errors)
+    
+@api_view(['DELETE'])
+def deleteStudent(req, pk):
+    studentModel.objects.get(id=pk).delete()
+    return Response({
+        'message':'Data Deleted successfully'
+    })

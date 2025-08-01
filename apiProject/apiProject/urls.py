@@ -7,4 +7,5 @@ urlpatterns = [
     path('studentData/', studentData, name='studentData'),
     path('addStudent/', addStudent, name='addStudent'),
     path('updateStudent/<int:pk>/', updateStudent, name='updateStudent'),
+    path('deleteStudent/<int:pk>/', deleteStudent, name='deleteStudent'),
 ]
