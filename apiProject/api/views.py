@@ -6,6 +6,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+
 @api_view(['GET'])
 def studentData(req):
     if req.method == 'GET':
@@ -45,3 +48,26 @@ def deleteStudent(req, pk):
     return Response({
         'message':'Data Deleted successfully'
     })
+
+class MovieListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    queryset = studentModel.objects.all()
+    serializer_class = studentSerializer
+
+    def get(self, request):
+        return self.list(request)
+
+    def post(self, request):
+        return self.create(request)
+
+class MovieDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
+    queryset = studentModel.objects.all()
+    serializer_class = studentSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk=pk)
+
+    def put(self, request, pk):
+        return self.update(request, pk=pk)
+
+    def delete(self, request, pk):
+        return self.destroy(request, pk=pk)
